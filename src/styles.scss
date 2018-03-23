@@ -1,0 +1,77 @@
+/* Add application styles & imports to this file! */
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~@angular/cdk/overlay";
+@include cdk-overlay();
+
+.draggable {
+  border: 1px solid #ccc;
+  margin: 1rem;
+  padding: 1rem;
+  width: 6rem;
+  cursor: move;
+}
+
+.movable:not(.draggable) {
+  transition: transform 300ms ease-in-out;
+}
+
+.pt-20 {
+  padding-top: 20px;
+}
+
+.pt-40 {
+  padding-top: 40px;
+}
+
+.pt-65 {
+  padding-top: 65px;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.expression-toprow-margin {
+  margin: 5px 15px;
+}
+
+.expression-drop-pd {
+  padding: 50px 0;
+}
+
+.badge-light {
+  background-color: #fff !important;
+}
+
+.center { 
+    // height: 200px;
+    padding-top: 100px;
+    position: relative;
+}
+
+.center span,
+.center button,
+.center input
+ {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+ul.list-group:after {
+  clear: both;
+  display: block;
+  content: "";
+  
+}
+
+.list-group-item {
+    float: left;
+    border: 0 !important;
+    margin: 0px;
+    padding: 15px 0px;
+}

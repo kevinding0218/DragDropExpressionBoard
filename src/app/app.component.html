@@ -1,0 +1,63 @@
+<div class="container-fluid">
+  <div class="row pt-20">
+    <div class="col-lg-4 offset-lg-5"><h4>Drag&Drop Expression Board</h4></div>
+  </div>
+	<div class="row pt-20">
+    <div class="col-lg-1">
+    <ul class="list-group">
+      <li class="list-group-item"><h3><span [h5Draggable]="{data: 'add'}" class="badge badge-primary">add</span></h3></li>
+      <li class="list-group-item"><h3><span [h5Draggable]="{data: 'substract'}" class="badge badge-success">substract</span></h3></li>
+      <li class="list-group-item"><h3><span [h5Draggable]="{data: 'foo'}" class="badge badge-warning">foo</span></h3></li>
+      <li class="list-group-item"><h3><span [h5Draggable]="{data: 'complicated'}" class="badge badge-danger">complicated</span></h3></li>
+      <li class="list-group-item"><button type="button" class="btn btn-dark" (click)="resetDropArea()">Clear</button></li>
+    </ul>
+    </div>
+		<div class="col-lg-11">
+			<div class="card">
+				<div class="card-block area" h5DropTarget (dropEmiiter)="onAreaDrop($event)">
+					<ng-container *ngIf="droppedIn; else initialDropArea" style="background-color: #ffcccc;border: 1px solid black;margin: 0px 20px;padding: 30px 15px;">
+						<div>
+							Please Drag and Drop Your First Expression
+						</div>
+					</ng-container>
+					<ng-template #initialDropArea>
+						<div [ngSwitch]="this.expressionOption">
+							<div *ngSwitchCase="'add'">
+								<add-expression [dropInExpression]="initialAddExpression"></add-expression>
+							</div>
+							<div *ngSwitchCase="'substract'">
+								<substract-expression [dropInExpression]="initialSubExpression"></substract-expression>
+							</div>
+              <div *ngSwitchCase="'foo'">
+								<foo-expression [dropInExpression]="initialFooExpression"></foo-expression>
+							</div>
+              <div *ngSwitchCase="'complicated'">
+								<complicate-expression [dropInExpression]="initialComplicatedExpression"></complicate-expression>
+							</div>
+						</div>
+					</ng-template>
+				</div>
+				<ng-template #childContainer>
+
+				</ng-template>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-1 offset-lg-3">
+		<h3><span [h5Draggable]="{data: 'add'}" class="badge badge-primary">add</span></h3>
+	</div>
+	<div class="col-lg-1">
+		<h3><span [h5Draggable]="{data: 'substract'}" class="badge badge-success">substract</span></h3>
+	</div>
+	<div class="col-lg-1">
+		<h3><span [h5Draggable]="{data: 'foo'}" class="badge badge-warning">foo</span></h3>
+	</div>
+  <div class="col-lg-1">
+		<h3><span [h5Draggable]="{data: 'complicated'}" class="badge badge-danger">complicated</span></h3>
+	</div>
+  <div class="col-lg-1 offset-lg-1">
+		<button type="button" class="btn btn-dark" (click)="resetDropArea()">Clear</button>
+	</div>
+</div>

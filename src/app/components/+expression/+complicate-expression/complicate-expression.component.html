@@ -1,0 +1,41 @@
+<div class="row expression-toprow-margin" style="background-color: #fff; border: 1px solid #f5302e;">
+	<div class="col-lg-3">
+		<div class="center">
+			<button type="button" class="btn-sm" style="background-color: #f86c6b;box-shadow: 3px 3px #f7aaaa;" (click)="displayExpression = !displayExpression">
+			comp
+			<div class="badge badge-light">{{CurrentExpressionResult}}</div>
+		</button>
+		</div>
+	</div>
+	<div class="col-lg-9">
+		<div class="row">
+			<div class="col-lg-12 center" style="border: 1px dashed #f5302e;text-align: center;" h5DropTarget (dropEmiiter)="onInputExpressionDrop($event)">
+				<ng-container *ngIf="isInputExpression(dropInExpression); else leftNestedExpression">
+					<input type="text" class="form-control" style="width: 60px;display: inline-block;" maxlength="4" size="4" [(ngModel)]="currentExpression.num_x"
+					 (ngModelChange)="InputChange($event)">
+				</ng-container>
+				<ng-template #leftNestedExpression>
+					<div [ngSwitch]="this.currentExpression.expression_x.name">
+						<div *ngSwitchCase="'add'">
+							<add-expression [dropInExpression]="this.currentExpression.expression_x" (parentRecal)="recalculateParent($event)"></add-expression>
+						</div>
+						<div *ngSwitchCase="'substract'">
+							<substract-expression [dropInExpression]="this.currentExpression.expression_x" (parentRecal)="recalculateParent($event)"></substract-expression>
+						</div>
+						<div *ngSwitchCase="'foo'">
+							<foo-expression [dropInExpression]="this.currentExpression.expression_x" (parentRecal)="recalculateParent($event)"></foo-expression>
+						</div>
+						<div *ngSwitchCase="'complicated'">
+							<complicate-expression [dropInExpression]="this.currentExpression.expression_x" (parentRecal)="recalculateParent($event)"></complicate-expression>
+						</div>
+					</div>
+				</ng-template>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" style="margin: 5px 15px;" *ngIf="displayExpression">
+	<div class="col-lg-4">
+		<span class="badge" style="background-color: #f86c6b;">Expression: {{ CurrentExpressionFormat }} = {{CurrentExpressionResult}}</span>
+	</div>
+</div>

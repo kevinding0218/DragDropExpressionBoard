@@ -1,0 +1,95 @@
+<div class="row expression-toprow-margin" style="background-color: #fff;border: 1px solid #c69500;">
+	<div class="col-lg-1">
+		<div class="center">
+			<button type="button" class="btn-sm" style="background-color: #c69500;box-shadow: 3px 3px #f5dd95;" (click)="displayExpression = !displayExpression">
+			foo
+			<div class="badge badge-light">{{CurrentExpressionResult}}</div>
+		</button>
+		</div>
+	</div>
+	<div class="col-lg-11">
+		<div class="row">
+			<div class="col-lg-3 center" style="border: 1px dashed #c69500;text-align: center;" h5DropTarget (dropEmiiter)="onLeftInputExpressionDrop($event)">
+				<ng-container *ngIf="isLeftInputExpression(dropInExpression); else leftNestedExpression">
+					<input type="text" class="form-control" style="width: 60px;display: inline-block;" maxlength="4" size="4" [(ngModel)]="currentExpression.num_x"
+					 (ngModelChange)="leftInputChange($event)">
+				</ng-container>
+				<ng-template #leftNestedExpression>
+					<div [ngSwitch]="this.currentExpression.expression_x.name">
+						<div *ngSwitchCase="'add'">
+							<add-expression [dropInExpression]="this.currentExpression.expression_x" (parentRecal)="recalculateParent($event)"></add-expression>
+						</div>
+						<div *ngSwitchCase="'substract'">
+							<substract-expression [dropInExpression]="this.currentExpression.expression_x" (parentRecal)="recalculateParent($event)"></substract-expression>
+						</div>
+						<div *ngSwitchCase="'foo'">
+							<foo-expression [dropInExpression]="this.currentExpression.expression_x" (parentRecal)="recalculateParent($event)"></foo-expression>
+						</div>
+						<div *ngSwitchCase="'complicated'">
+							<complicate-expression [dropInExpression]="this.currentExpression.expression_x" (parentRecal)="recalculateParent($event)"></complicate-expression>
+						</div>
+					</div>
+				</ng-template>
+			</div>
+			<div class="col-lg-1">
+				<div class="center">
+					<span class="badge badge-light" style="border: 1px solid #c69500;">*</span>
+				</div>
+			</div>
+			<div class="col-lg-3 center" style="border: 1px dashed #c69500;text-align: center;" h5DropTarget (dropEmiiter)="onMiddleInputExpressionDrop($event)">
+				<ng-container *ngIf="isMiddleInputExpression(dropInExpression); else middleNestedExpression">
+					<input type="text" class="form-control" style="width: 60px;display: inline-block;" maxlength="4" size="4" [(ngModel)]="currentExpression.num_y"
+					 (ngModelChange)="middleInputChange($event)">
+				</ng-container>
+				<ng-template #middleNestedExpression>
+					<div [ngSwitch]="this.currentExpression.expression_y.name">
+						<div *ngSwitchCase="'add'">
+							<add-expression [dropInExpression]="this.currentExpression.expression_y" (parentRecal)="recalculateParent($event)"></add-expression>
+						</div>
+						<div *ngSwitchCase="'substract'">
+							<substract-expression [dropInExpression]="this.currentExpression.expression_y" (parentRecal)="recalculateParent($event)"></substract-expression>
+						</div>
+						<div *ngSwitchCase="'foo'">
+							<foo-expression [dropInExpression]="this.currentExpression.expression_y" (parentRecal)="recalculateParent($event)"></foo-expression>
+						</div>
+						<div *ngSwitchCase="'complicated'">
+							<complicate-expression [dropInExpression]="this.currentExpression.expression_y" (parentRecal)="recalculateParent($event)"></complicate-expression>
+						</div>
+					</div>
+				</ng-template>
+			</div>
+			<div class="col-lg-1">
+				<div class="center">
+					<span class="badge badge-light" style="border: 1px solid #c69500;">*</span>
+				</div>
+			</div>
+			<div class="col-lg-3 center" style="border: 1px dashed #c69500;text-align: center;" h5DropTarget (dropEmiiter)="onRightInputExpressionDrop($event)">
+				<ng-container *ngIf="isRightInputExpression(dropInExpression); else rightNestedExpression">
+					<input type="text" class="form-control" style="width: 60px;display: inline-block;" maxlength="4" size="4" [(ngModel)]="currentExpression.num_z"
+					 (ngModelChange)="rightInputChange($event)">
+				</ng-container>
+				<ng-template #rightNestedExpression>
+					<div [ngSwitch]="this.currentExpression.expression_z.name">
+						<div *ngSwitchCase="'add'">
+							<add-expression [dropInExpression]="this.currentExpression.expression_z" (parentRecal)="recalculateParent($event)"></add-expression>
+						</div>
+						<div *ngSwitchCase="'substract'">
+							<substract-expression [dropInExpression]="this.currentExpression.expression_z" (parentRecal)="recalculateParent($event)"></substract-expression>
+						</div>
+						<div *ngSwitchCase="'foo'">
+							<foo-expression [dropInExpression]="this.currentExpression.expression_z" (parentRecal)="recalculateParent($event)"></foo-expression>
+						</div>
+						<div *ngSwitchCase="'complicated'">
+							<complicate-expression [dropInExpression]="this.currentExpression.expression_z" (parentRecal)="recalculateParent($event)"></complicate-expression>
+						</div>
+					</div>
+				</ng-template>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="row" style="margin: 5px 15px;" *ngIf="displayExpression">
+	<div class="col-lg-4">
+		<span class="badge" style="background-color: #c69500;">Expression: {{ CurrentExpressionFormat }} = {{CurrentExpressionResult}}</span>
+	</div>
+</div>
